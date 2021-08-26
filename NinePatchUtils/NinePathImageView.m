@@ -55,8 +55,10 @@
     _reverseX = reverseX;
     
     if (reverseX) {
+#if !TARGET_ON_iOS
         [self setAnchorPoint:CGPointMake(0.5, 0.5) foirView:self];
         [self setAnchorPoint:CGPointMake(0.5, 0.5) foirView:self.contentView];
+#endif
         
         self.layer.affineTransform = CGAffineTransformMakeScale(-1, 1);
         self.contentView.layer.affineTransform = CGAffineTransformMakeScale(-1, 1);
@@ -338,9 +340,6 @@
 
 -(void)setAnchorPoint:(CGPoint)anchorPoint foirView:(ViewClass*)view
 {
-#if TARGET_ON_iOS
-    return;
-#endif
     view.layer.anchorPoint = anchorPoint;
  
     CGRect frame = view.layer.frame;
