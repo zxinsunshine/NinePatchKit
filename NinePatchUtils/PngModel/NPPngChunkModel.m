@@ -34,7 +34,7 @@ static const NSInteger kChunkCrcBytesLen = 4; // CRC header length
         NSInteger dataLen = data.length;
         
         NSRange lenRange = NSMakeRange(index, kChunkDataLengthBytesLen);
-        NSString * lenHexStr = [data hexStrWithRange:lenRange];
+        NSString * lenHexStr = [data np_hexStrWithRange:lenRange];
         // data长度
         self.chunkDataLength = strtoul([lenHexStr UTF8String], 0, 16);
         // type code
@@ -47,7 +47,7 @@ static const NSInteger kChunkCrcBytesLen = 4; // CRC header length
         // CRC
         dataBeginIndex += self.chunkDataLength;
         NSData * crcData = [data subdataWithRange:NSMakeRange(dataBeginIndex, kChunkCrcBytesLen)];
-        self.crcCode = strtoul([[crcData hexStr] UTF8String], 0, 16);
+        self.crcCode = strtoul([[crcData np_hexStr] UTF8String], 0, 16);
         
         // 总字节大小
         self.totalLength = kChunkDataLengthBytesLen + kChunkTypeBytesLen + self.chunkDataLength + kChunkCrcBytesLen;

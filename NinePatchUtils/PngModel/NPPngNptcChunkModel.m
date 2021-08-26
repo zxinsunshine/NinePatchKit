@@ -54,7 +54,7 @@
     beginIndex += byteLen;
     byteLen = 1;
     lenRange = NSMakeRange(beginIndex, byteLen);
-    NSString * divXLenHexStr = [data hexStrWithRange:lenRange];
+    NSString * divXLenHexStr = [data np_hexStrWithRange:lenRange];
     NSInteger divXLen = strtoul([divXLenHexStr UTF8String], 0, 16);
     
     // mDivY length
@@ -62,7 +62,7 @@
     beginIndex += byteLen;
     byteLen = 1;
     lenRange = NSMakeRange(beginIndex, byteLen);
-    NSString * divYLenHexStr = [data hexStrWithRange:lenRange];
+    NSString * divYLenHexStr = [data np_hexStrWithRange:lenRange];
     NSInteger divYLen = strtoul([divYLenHexStr UTF8String], 0, 16);
     
     // mColor length
@@ -70,7 +70,7 @@
     beginIndex += byteLen;
     byteLen = 1;
     lenRange = NSMakeRange(beginIndex, byteLen);
-    NSString * colorLenHexStr = [data hexStrWithRange:lenRange];
+    NSString * colorLenHexStr = [data np_hexStrWithRange:lenRange];
     NSInteger colorLen = strtoul([colorLenHexStr UTF8String], 0, 16);
     
     // skip
@@ -85,7 +85,7 @@
     beginIndex += byteLen;
     byteLen = 4;
     lenRange = NSMakeRange(beginIndex, byteLen);
-    NSString * paddingLeftHexStr = [data hexStrWithRange:lenRange];
+    NSString * paddingLeftHexStr = [data np_hexStrWithRange:lenRange];
     NSInteger paddingLeft = strtoul([paddingLeftHexStr UTF8String], 0, 16);
     
     // padding right
@@ -93,7 +93,7 @@
     beginIndex += byteLen;
     byteLen = 4;
     lenRange = NSMakeRange(beginIndex, byteLen);
-    NSString * paddingRightHexStr = [data hexStrWithRange:lenRange];
+    NSString * paddingRightHexStr = [data np_hexStrWithRange:lenRange];
     NSInteger paddingRight = strtoul([paddingRightHexStr UTF8String], 0, 16);
     
     // padding top
@@ -101,7 +101,7 @@
     beginIndex += byteLen;
     byteLen = 4;
     lenRange = NSMakeRange(beginIndex, byteLen);
-    NSString * paddingTopHexStr = [data hexStrWithRange:lenRange];
+    NSString * paddingTopHexStr = [data np_hexStrWithRange:lenRange];
     NSInteger paddingTop = strtoul([paddingTopHexStr UTF8String], 0, 16);
     
     // padding bottom
@@ -109,7 +109,7 @@
     beginIndex += byteLen;
     byteLen = 4;
     lenRange = NSMakeRange(beginIndex, byteLen);
-    NSString * paddingBottomHexStr = [data hexStrWithRange:lenRange];
+    NSString * paddingBottomHexStr = [data np_hexStrWithRange:lenRange];
     NSInteger paddingBottom = strtoul([paddingBottomHexStr UTF8String], 0, 16);
     
     // skip
@@ -126,7 +126,7 @@
         beginIndex += byteLen;
         byteLen = 4;
         lenRange = NSMakeRange(beginIndex, byteLen);
-        NSString * divXPointHexStr = [data hexStrWithRange:lenRange];
+        NSString * divXPointHexStr = [data np_hexStrWithRange:lenRange];
         NSInteger divXPoint = strtoul([divXPointHexStr UTF8String], 0, 16);
         [divXPointList addObject:@(divXPoint)];
     }
@@ -138,7 +138,7 @@
         beginIndex += byteLen;
         byteLen = 4;
         lenRange = NSMakeRange(beginIndex, byteLen);
-        NSString * divYPointHexStr = [data hexStrWithRange:lenRange];
+        NSString * divYPointHexStr = [data np_hexStrWithRange:lenRange];
         NSInteger divYPoint = strtoul([divYPointHexStr UTF8String], 0, 16);
         [divYPointList addObject:@(divYPoint)];
     }
@@ -150,7 +150,7 @@
         beginIndex += byteLen;
         byteLen = 4;
         lenRange = NSMakeRange(beginIndex, byteLen);
-        NSString * colorHexStr = [data hexStrWithRange:lenRange];
+        NSString * colorHexStr = [data np_hexStrWithRange:lenRange];
         NSInteger colorInt = strtoul([colorHexStr UTF8String], 0, 16);
         [colorList addObject:@(colorInt)];
     }

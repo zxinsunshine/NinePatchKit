@@ -33,7 +33,7 @@
 
 + (BOOL)isPngFile:(NSData * )data {
     NSRange range = NSMakeRange(0, kPngSingnatureLen);
-    NSString * headStr = [data hexStrWithRange:range];
+    NSString * headStr = [data np_hexStrWithRange:range];
     return [headStr isEqualToString:@"89504e470d0a1a0a"];
 }
 

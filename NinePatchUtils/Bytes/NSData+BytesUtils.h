@@ -12,20 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSData (BytesUtils)
 
 /// Judge if is small endian
-+ (BOOL)isSmallEndian;
++ (BOOL)np_isSmallEndian;
 
 /// The hex string of data
-- (NSString *)hexStr;
+- (NSString *)np_hexStr;
 
 /// The hex string of data in range
 /// @param range range of data
-- (NSString *)hexStrWithRange:(NSRange)range;
+- (NSString *)np_hexStrWithRange:(NSRange)range;
 
 /// The decimal string list of data
-- (NSString *)strByteList;
+- (NSString *)np_strByteList;
 
 /// The decimal number list of data
-- (NSArray<NSNumber *> *)intByteList;
+- (NSArray<NSNumber *> *)np_intByteList;
 
 @end
 
