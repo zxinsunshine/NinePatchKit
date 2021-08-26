@@ -1,36 +1,48 @@
 # NinePathKit
 
-#### Description
-NinePath image parser for iOS
+----------------
 
-#### Software Architecture
-Software architecture description
+NinePatch image parser and render framework for iOS & macOS
+
+#### Main Features
+* parse png's binary data to get its chunk data
+* slice image according its npTc chunk, then draw them in rule
+* NinePathImageView has its contentView like UITableViewCell, where you can place any UI object
+* support flip horizontally and vertically
+* support muliple platform
+
+#### Requirements
+
+* iOS 9.0+
+
+* macOS 10.11+
 
 #### Installation
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##### CocoaPods
 
-#### Instructions
+The preferred installation method is with [CocoaPods](https://cocoapods.org). Add the following to your `Podfile`:
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```ruby
+pod 'NinePatchKit', '~> 1.0'
+```
 
-#### Contribution
+##### Manual
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+Copy NinePatchUtils directory in your project
 
 
-#### Gitee Feature
+#### Getting Started
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+```objective-c
+#import <NinePatchKit/NinePatchKit.h>
+...
+NSString * path = [[NSBundle mainBundle] pathForResource:@"YourNinePatchImageName" ofType:@"png"];
+NinePathImageView * imageView = [[NinePathImageView alloc] init];
+imageView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
+```
+
+#### License
+
+`NinePatchKit` is [MIT-licensed](https://github.com/zxinsunshine/NinePatchKit/blob/master/LICENSE).
+

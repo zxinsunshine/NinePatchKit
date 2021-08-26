@@ -7,7 +7,7 @@
 
 #import "ZXStretchViewController.h"
 #import <Masonry/Masonry.h>
-#import "NinePatchUtils.h"
+#import <NinePatchKit/NinePatchKit.h>
 #import "NinePathImageView.h"
 
 @interface ZXStretchViewController ()<UITextViewDelegate>
