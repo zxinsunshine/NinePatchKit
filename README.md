@@ -1,10 +1,21 @@
-# NinePathKit
+# NinePatchKit
 
-#### 介绍
-NinePath image parser for iOS
+----------------
 
-#### 软件架构
-软件架构说明
+一个iOS & macOS端的点九图解析和渲染的框架
+
+#### 主要特性
+* 解析png文件的二进制数据中chunk段数据
+
+* 根据npTc chunk数据切分点九图，重绘渲染
+
+* 像UITableViewCell一样拥有自己的contentView，可以填充任意内容
+
+* 支持横向和纵向翻转
+
+* 支持多平台
+
+  
 
 
 #### 安装教程
