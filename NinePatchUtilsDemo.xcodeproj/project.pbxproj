@@ -629,7 +629,7 @@
 				CODE_SIGN_ENTITLEMENTS = NinePatchUtilsDemo_Mac/NinePatchUtilsDemo_Mac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KZVQ699A4W;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = NinePatchUtilsDemo_Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -652,7 +652,7 @@
 				CODE_SIGN_ENTITLEMENTS = NinePatchUtilsDemo_Mac/NinePatchUtilsDemo_Mac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KZVQ699A4W;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = NinePatchUtilsDemo_Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
