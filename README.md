@@ -1,37 +1,43 @@
-# NinePatchKit
+# NinePathKit
 
 ----------------
 
-一个iOS & macOS端的点九图解析和渲染的框架
+NinePatch image parser and render framework for iOS & macOS
 
-#### 主要特性
-* 解析png文件的二进制数据中chunk段数据
-* 根据npTc chunk数据切分点九图，重绘渲染
-* NinePathImageView像UITableViewCell一样拥有自己的contentView，可以填充任意内容
-* 支持横向和纵向翻转
-* 支持多平台
+#### Multilingual translation
 
-#### 要求
+[Chinese README](README.zh.md)
+
+#### Main Features
+
+* parse png's binary data to get its chunk data
+* slice image according its npTc chunk, then draw them in rule
+* NinePathImageView has its contentView like UITableViewCell, where you can place any UI object
+* support flip horizontally and vertically
+* support muliple platform
+
+#### Requirements
 
 * iOS 9.0+
+
 * macOS 10.11+
 
-
-#### 安装教程
+#### Installation
 
 ##### CocoaPods
 
-推荐使用[CocoaPods](https://cocoapods.org)来进行安装，只需添加如下语句到你的`Podfile`文件中:
+The preferred installation method is with [CocoaPods](https://cocoapods.org). Add the following to your `Podfile`:
 
 ```ruby
 pod 'NinePatchKit', '~> 1.0'
 ```
 
-##### 手动安装
+##### Manual
 
-将NinePatchUtils文件夹拖入工程中直接使用
+Copy NinePatchUtils directory in your project
 
-#### 入门指南
+
+#### Getting Started
 
 ```objective-c
 #import <NinePatchKit/NinePatchKit.h>
@@ -43,4 +49,5 @@ imageView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
 
 #### License
 
-`NinePatchKit` 遵循[MIT-licensed](https://github.com/zxinsunshine/NinePatchKit/blob/master/LICENSE)。
+`NinePatchKit` is [MIT-licensed](https://github.com/zxinsunshine/NinePatchKit/blob/master/LICENSE).
+
