@@ -11,21 +11,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSData (BytesUtils)
 
-
-/// 是否是小端
+/// Judge if is small endian
 + (BOOL)isSmallEndian;
 
-/// 16进制字符串表示
+/// The hex string of data
 - (NSString *)hexStr;
 
-/// 局部16进制字符串表示
-/// @param range 局部范围
+/// The hex string of data in range
+/// @param range range of data
 - (NSString *)hexStrWithRange:(NSRange)range;
 
-/// 10进制字节字符串数组
+/// The decimal string list of data
 - (NSString *)strByteList;
 
-/// 10进制字节数字数组
+/// The decimal number list of data
 - (NSArray<NSNumber *> *)intByteList;
 
 @end

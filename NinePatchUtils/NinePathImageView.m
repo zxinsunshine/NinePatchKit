@@ -248,13 +248,13 @@
 - (void)drawStretchImage:(NPMultiStretchImage *)stretchImage inRect:(CGRect)rect {
     CGSize size = rect.size;
 
-    // 绘制改变大小的图片
+    // draw slice images
     NSArray<NSArray<NPMultiStretchSliceImage *> *> * slice2DImages = stretchImage.sliceImages;
-    // 当前尺寸小于固定部分的尺寸，则只绘制固定部分
+    
     CGFloat maxSolidWidth = stretchImage.maxSolidWidth;
     CGFloat maxSolidHeight = stretchImage.maxSolidHeight;
     
-    // 若总size小于最大固定宽高，则绘制固定区域时，按比例绘制宽高
+    // if real size is less than raw image size, then draw solid images in ratio
     CGFloat solidWidthRatio = 1;
     CGFloat solidHeightRatio = 1;
     if (size.width < maxSolidWidth) {
@@ -264,7 +264,7 @@
         solidHeightRatio = size.height / maxSolidHeight;
     }
     
-    // 需要拉伸的总宽高
+    // the total part of stretch size
     CGSize stretchSize = CGSizeMake(MAX(0, size.width - stretchImage.maxSolidWidth), MAX(0, size.height - stretchImage.maxSolidHeight));
     
     NSMutableArray <NSNumber *> * beginYList = [NSMutableArray array];
@@ -304,7 +304,7 @@
             }
             CGFloat finalBeginY = beginY;
 #if !TARGET_ON_iOS
-            // MacOS的Y坐标与iOS方向相反
+            // macOS's Y axis is reverse to iOS's
             finalBeginY = size.height - (beginY + drawSize.height);
 #endif
             [line[i].totalImage drawInRect:CGRectMake(beginX, finalBeginY, drawSize.width, drawSize.height)];

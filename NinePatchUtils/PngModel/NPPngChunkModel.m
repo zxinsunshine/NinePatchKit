@@ -9,9 +9,9 @@
 #import "NSData+BytesUtils.h"
 #import <zlib.h>
 
-static const NSInteger kChunkDataLengthBytesLen = 4; // Length 字段长度
-static const NSInteger kChunkTypeBytesLen = 4; // Type 字段长度
-static const NSInteger kChunkCrcBytesLen = 4; // CRC 字段长度
+static const NSInteger kChunkDataLengthBytesLen = 4; // Length header length
+static const NSInteger kChunkTypeBytesLen = 4; // Type header length
+static const NSInteger kChunkCrcBytesLen = 4; // CRC header length
 
 @interface NPPngChunkModel()
 

@@ -83,11 +83,11 @@
 + (BOOL)isSmallEndian {
     union w
     {
-        int a;//在ios中，4 Byte
-        char b;//在ios中，1 Byte
+        int a;// 4 Byte
+        char b;// 1 Byte
     } c;
     c.a = 1;
-    return(c.b ==1); //如果c.b == 1，表示第一位是0x01，那就是小端，如果返回0，就是大端
+    return(c.b ==1);
 }
 
 #pragma mark - Private Methods
