@@ -1,0 +1,23 @@
+PODS:
+  - Masonry (1.1.0)
+  - NinePatchKit (1.0)
+
+DEPENDENCIES:
+  - Masonry
+  - NinePatchKit (from `.`)
+
+SPEC REPOS:
+  trunk:
+    - Masonry
+
+EXTERNAL SOURCES:
+  NinePatchKit:
+    :path: "."
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  NinePatchKit: d168e904cbc6827ab8b4114c2f06b3cc0c3935de
+
+PODFILE CHECKSUM: 1402b1a013d9dac526d5b5b01adddd7b84e31f75
+
+COCOAPODS: 1.10.1

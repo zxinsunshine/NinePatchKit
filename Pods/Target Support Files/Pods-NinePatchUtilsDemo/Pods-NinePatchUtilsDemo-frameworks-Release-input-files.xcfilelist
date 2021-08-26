@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-NinePatchUtilsDemo/Pods-NinePatchUtilsDemo-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Masonry-iOS/Masonry.framework
+${BUILT_PRODUCTS_DIR}/NinePatchKit-iOS/NinePatchKit.framework

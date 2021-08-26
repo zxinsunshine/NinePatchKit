@@ -1,0 +1,6 @@
+framework module NinePatchKit {
+  umbrella header "NinePatchKit-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

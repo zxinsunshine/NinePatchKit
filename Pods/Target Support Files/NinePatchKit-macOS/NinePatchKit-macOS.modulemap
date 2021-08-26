@@ -1,0 +1,6 @@
+framework module NinePatchKit {
+  umbrella header "NinePatchKit-macOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
