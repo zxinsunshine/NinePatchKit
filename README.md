@@ -12,7 +12,7 @@ NinePatch image parser and render framework for iOS & macOS
 
 * parse png's binary data to get its chunk data
 * slice image according its npTc chunk, then draw them in rule
-* NinePathImageView has its contentView like UITableViewCell, where you can place any UI object
+* NinePatchImageView has its contentView like UITableViewCell, where you can place any UI object
 * support flip horizontally and vertically
 * support muliple platform
 
@@ -48,7 +48,7 @@ Copy NinePatchUtils directory in your project
 #import <NinePatchKit/NinePatchKit.h>
 ...
 NSString * path = [[NSBundle mainBundle] pathForResource:@"YourNinePatchImageName" ofType:@"png"];
-NinePathImageView * imageView = [[NinePathImageView alloc] init];
+NinePatchImageView * imageView = [[NinePatchImageView alloc] init];
 imageView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
 ```
 
