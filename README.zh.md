@@ -21,6 +21,14 @@
 * iOS 9.0+
 * macOS 10.11+
 
+#### 效果展示
+
+![Demo](./Demo.gif)
+
+![Demo_for_mac](./Demo_for_mac.gif)
+
+
+
 
 #### 安装教程
 

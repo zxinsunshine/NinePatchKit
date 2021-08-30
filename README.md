@@ -19,8 +19,13 @@ NinePatch image parser and render framework for iOS & macOS
 #### Requirements
 
 * iOS 9.0+
-
 * macOS 10.11+
+
+#### Effects
+
+![Demo](./Demo.gif)
+
+![Demo_for_mac](./Demo_for_mac.gif)
 
 #### Installation
 
