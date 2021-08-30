@@ -155,7 +155,7 @@
         [colorList addObject:@(colorInt)];
     }
     
-    // 解析完整
+    // analyse finished
     beginIndex += byteLen;
     if (data.length - beginIndex == 0) {
         self.padding = EdgeStructMake(paddingTop, paddingLeft, paddingBottom, paddingRight);

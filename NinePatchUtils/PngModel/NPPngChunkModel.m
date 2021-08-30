@@ -35,11 +35,11 @@ static const NSInteger kChunkCrcBytesLen = 4; // CRC header length
         
         NSRange lenRange = NSMakeRange(index, kChunkDataLengthBytesLen);
         NSString * lenHexStr = [data np_hexStrWithRange:lenRange];
-        // data长度
+        // length of chunk data
         self.chunkDataLength = strtoul([lenHexStr UTF8String], 0, 16);
         // type code
         self.chunkTypeCode = [NPPngChunkModel codeTypeWithData:data beginIndex:index];
-        // chunk数据
+        // chunk data
         NSInteger dataBeginIndex = index + kChunkDataLengthBytesLen + kChunkTypeBytesLen;
         if (self.chunkDataLength > 0 && dataBeginIndex + self.chunkDataLength <= dataLen) {
             self.chunkData = [data subdataWithRange:NSMakeRange(dataBeginIndex, self.chunkDataLength)];
@@ -49,9 +49,9 @@ static const NSInteger kChunkCrcBytesLen = 4; // CRC header length
         NSData * crcData = [data subdataWithRange:NSMakeRange(dataBeginIndex, kChunkCrcBytesLen)];
         self.crcCode = strtoul([[crcData np_hexStr] UTF8String], 0, 16);
         
-        // 总字节大小
+        // total length of chunk
         self.totalLength = kChunkDataLengthBytesLen + kChunkTypeBytesLen + self.chunkDataLength + kChunkCrcBytesLen;
-        // 总data
+        // total data
         self.totalData = [data subdataWithRange:NSMakeRange(index, self.totalLength)];
     }
     return self;

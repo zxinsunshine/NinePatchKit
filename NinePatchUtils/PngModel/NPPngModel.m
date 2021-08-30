@@ -9,8 +9,6 @@
 #import "NSData+BytesUtils.h"
 #import "NPPngNptcChunkModel.h"
 
-
-
 @interface NPPngModel()
 
 @property (nonatomic, strong, readwrite) NSArray<NPPngChunkModel *> * chunkList;
@@ -45,8 +43,8 @@
         return;
     }
     
-    // Png数据由 文件署名(8 bytes) + 多个数据块组成
-    // 每个数据块Chunk由 Length(chunk data长度 4 bytes) + Chunk Type Code(4 bytes) + Chunk Data + CRC(循环冗余检测 4 bytes) 组成
+    // Png data is composed of file signature(8 bytes) and many chunk datas
+    // each chunk is composed of Length(chunk data's length 4 bytes) + Chunk Type Code(4 bytes) + Chunk Data + CRC(Cyclic redundancy detection 4 bytes)
     NSMutableArray * chunkList = [NSMutableArray array];
     NSInteger beginIndex = kPngSingnatureLen;
     NSInteger dataLen = data.length;
