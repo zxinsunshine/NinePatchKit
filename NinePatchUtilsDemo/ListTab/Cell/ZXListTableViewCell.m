@@ -19,7 +19,7 @@ static const CGFloat kLabelFontSize = 13;
 @interface ZXListTableViewCell()
 
 @property (nonatomic, strong) UIView * avatarView;
-@property (nonatomic, strong) NinePathImageView * showView;
+@property (nonatomic, strong) NinePatchImageView * showView;
 @property (nonatomic, strong) UILabel * label;
 
 @end
@@ -132,9 +132,9 @@ static const CGFloat kLabelFontSize = 13;
     return _avatarView;
 }
 
-- (NinePathImageView *)showView {
+- (NinePatchImageView *)showView {
     if (!_showView) {
-        _showView = [[NinePathImageView alloc] init];
+        _showView = [[NinePatchImageView alloc] init];
     }
     return _showView;
 }

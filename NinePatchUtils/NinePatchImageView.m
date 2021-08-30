@@ -1,21 +1,21 @@
 //
-//  NinePathImageView.m
+//  NinePatchImageView.m
 //  Test
 //
 //  Created by Theo on 2021/7/16.
 //
 
-#import "NinePathImageView.h"
+#import "NinePatchImageView.h"
 #import "NPMultiStretchImage.h"
 
-@interface NinePathImageView()
+@interface NinePatchImageView()
 
 @property (nonatomic, assign, readwrite) EdgeStruct padding;
 @property (nonatomic, strong, readwrite) ViewClass * contentView;
 
 @end
 
-@implementation NinePathImageView
+@implementation NinePatchImageView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

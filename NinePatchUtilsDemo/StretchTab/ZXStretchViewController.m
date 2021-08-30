@@ -8,11 +8,10 @@
 #import "ZXStretchViewController.h"
 #import <Masonry/Masonry.h>
 #import <NinePatchKit/NinePatchKit.h>
-#import "NinePathImageView.h"
 
 @interface ZXStretchViewController ()<UITextViewDelegate>
 
-@property (nonatomic, strong) NinePathImageView * backView;
+@property (nonatomic, strong) NinePatchImageView * backView;
 @property (nonatomic, strong) UIButton * switchBtn;
 @property (nonatomic, strong) UISlider * slideView1;
 @property (nonatomic, strong) UISlider * slideView2;
@@ -135,10 +134,10 @@
 }
 
 #pragma mark - Getter
-- (NinePathImageView *)backView {
+- (NinePatchImageView *)backView {
     if (!_backView) {
         _backView = ({
-            NinePathImageView * view = [[NinePathImageView alloc] init];
+            NinePatchImageView * view = [[NinePatchImageView alloc] init];
             view;
         });
     }

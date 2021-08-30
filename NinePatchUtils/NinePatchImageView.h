@@ -1,5 +1,5 @@
 //
-//  NinePathImageView.h
+//  NinePatchImageView.h
 //  Test
 //
 //  Created by Theo on 2021/7/16.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NinePathImageView : ViewClass
+@interface NinePatchImageView : ViewClass
 
 @property (nonatomic, strong) ImageClass * showImage;
 @property (nonatomic, assign, readonly) EdgeStruct padding;

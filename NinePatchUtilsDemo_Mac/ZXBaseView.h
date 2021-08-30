@@ -8,7 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Masonry.h"
 #import "NinePatchUtils.h"
-#import "NinePathImageView.h"
+#import "NinePatchImageView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

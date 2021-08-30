@@ -1,6 +1,6 @@
 PODS:
   - Masonry (1.1.0)
-  - NinePatchKit (1.0)
+  - NinePatchKit (1.1)
 
 DEPENDENCIES:
   - Masonry
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  NinePatchKit: d168e904cbc6827ab8b4114c2f06b3cc0c3935de
+  NinePatchKit: 25f9a1a3275b3e0c97d70699c80f33cc98999e61
 
 PODFILE CHECKSUM: 1402b1a013d9dac526d5b5b01adddd7b84e31f75
 

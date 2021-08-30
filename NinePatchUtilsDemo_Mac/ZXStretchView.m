@@ -12,7 +12,7 @@
 @property (nonatomic, strong) NSSlider *slideView1;
 @property (nonatomic, strong) NSSlider *slideView2;
 @property (nonatomic, strong) NSButton *switchButton;
-@property (nonatomic, strong) NinePathImageView * backView;
+@property (nonatomic, strong) NinePatchImageView * backView;
 @property (nonatomic, assign) NSInteger imageNumber;
 
 @end
@@ -122,12 +122,12 @@
     return _switchButton;
 }
 
-- (NinePathImageView *)backView
+- (NinePatchImageView *)backView
 {
     if (!_backView)
     {
         _backView = ({
-            NinePathImageView * view = [[NinePathImageView alloc] init];
+            NinePatchImageView * view = [[NinePatchImageView alloc] init];
             NSString *path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"png"];
             self.imageNumber = 6;
             view.showImage = [NinePatchUtils imageWithContentsOfFile:path];

@@ -11,9 +11,9 @@
 #endif
 
 #import "NinePatchCompatibility.h"
+#import "NinePatchImageView.h"
 #import "NinePatchKit.h"
 #import "NinePatchUtils.h"
-#import "NinePathImageView.h"
 
 FOUNDATION_EXPORT double NinePatchKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char NinePatchKitVersionString[];
