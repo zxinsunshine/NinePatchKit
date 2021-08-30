@@ -21,7 +21,7 @@
 #define UnsignedInt uInt
 #define ScreenScale [[UIScreen mainScreen] scale]
 #define ColorClass UIColor
-#define MaxScreenScale 3
+#define MaxScreenScale 3.0
 
 #else
 
@@ -34,6 +34,6 @@
 #define UnsignedInt UInt
 #define ScreenScale [[NSScreen mainScreen] backingScaleFactor]
 #define ColorClass NSColor
-#define MaxScreenScale 2
+#define MaxScreenScale 2.0
 
 #endif

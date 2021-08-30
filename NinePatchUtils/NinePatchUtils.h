@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param path local path
 + (ImageClass *)imageWithContentsOfFile:(NSString *)path;
 
+/// Read NinePatchImage from binary data
+/// @param data binary data
++ (ImageClass *)imageWithData:(NSData *)data;
+
 /// Get Inner Padding of Image
 /// @param image Image object
 + (EdgeStruct)paddingForImage:(ImageClass *)image;

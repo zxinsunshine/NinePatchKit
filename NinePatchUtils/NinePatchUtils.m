@@ -8,8 +8,7 @@
 #import "NinePatchUtils.h"
 #import "NPMultiStretchImage.h"
 
-#define FormatCacheKeyFromAsset(name, fromScale, toScale) [NSString stringWithFormat:@"Asset-%@-%lf-%lf", name, fromScale, toScale]
-#define FormatCacheKeyFromBundle(path, fromScale, toScale) [NSString stringWithFormat:@"Path-%@-%lf-%lf", path, fromScale, toScale]
+#define FormatCacheKeyFromPrefix(prefix, name, fromScale, toScale) [NSString stringWithFormat:@"%@-%@-%lf-%lf", prefix, name, fromScale, toScale]
 
 @interface NinePatchUtils()
 
@@ -22,12 +21,30 @@
 
 + (ImageClass *)imageNamed:(NSString *)name {
     
-    return [self imageNamed:name fromScale:MaxScreenScale toScale:ScreenScale];
+    NSData * imageData = [[NSDataAsset alloc] initWithName:name].data;
+    NSString * cacheKey = FormatCacheKeyFromPrefix(@"Asset", name, MaxScreenScale, ScreenScale);
+    ImageClass * stretchImage = [self getStretchImageWithRawImage:imageData forKey:cacheKey fromScale:MaxScreenScale toScale:ScreenScale];
+
+    return stretchImage;
 }
 
 + (ImageClass *)imageWithContentsOfFile:(NSString *)path {
     
-    return [self imageWithContentsOfFile:path fromScale:MaxScreenScale toScale:ScreenScale];
+    NSData * imageData = [NSData dataWithContentsOfFile:path];
+    NSString * cacheKey = FormatCacheKeyFromPrefix(@"Bundle", path, MaxScreenScale, ScreenScale);
+    ImageClass * stretchImage = [self getStretchImageWithRawImage:imageData forKey:cacheKey fromScale:MaxScreenScale toScale:ScreenScale];
+
+    return stretchImage;
+}
+
++ (ImageClass *)imageWithData:(NSData *)data {
+    
+    NSData * imageData = data;
+    NSString * path = [NSString stringWithFormat:@"%p", imageData];
+    NSString * cacheKey = FormatCacheKeyFromPrefix(@"Data", path, MaxScreenScale, ScreenScale);
+    ImageClass * stretchImage = [self getStretchImageWithRawImage:imageData forKey:cacheKey fromScale:MaxScreenScale toScale:ScreenScale];
+
+    return stretchImage;
 }
 
 + (EdgeStruct)paddingForImage:(ImageClass *)image {
@@ -62,22 +79,6 @@
     [[NinePatchUtils sharedInstance].cache removeAllObjects];
 }
 
-+ (ImageClass *)imageNamed:(NSString *)name fromScale:(CGFloat)fromScale toScale:(CGFloat)toScale {
-    NSData * imageData = [[NSDataAsset alloc] initWithName:name].data;
-    NSString * cacheKey = FormatCacheKeyFromAsset(name, fromScale, toScale);
-    ImageClass * stretchImage = [self getStretchImageWithRawImage:imageData forKey:cacheKey fromScale:fromScale toScale:toScale];
-    
-    return stretchImage;
-}
-
-+ (ImageClass *)imageWithContentsOfFile:(NSString *)path fromScale:(CGFloat)fromScale toScale:(CGFloat)toScale {
-    NSData * imageData = [NSData dataWithContentsOfFile:path];
-    NSString * cacheKey = FormatCacheKeyFromBundle(path, fromScale, toScale);
-    ImageClass * stretchImage = [self getStretchImageWithRawImage:imageData forKey:cacheKey fromScale:fromScale toScale:toScale];
-
-    return stretchImage;
-}
-
 + (ImageClass *)getStretchImageWithRawImage:(NSData *)imageData forKey:(NSString *)key fromScale:(CGFloat)fromScale toScale:(CGFloat)toScale {
     
     // priority cache
@@ -98,7 +99,7 @@
 - (NSCache *)cache {
     if (!_cache) {
         _cache = [[NSCache alloc] init];
-        _cache.totalCostLimit = 1024 * 1024 * 5; // 5M
+        _cache.totalCostLimit = 1024 * 1024 * 50; // 50M
     }
     return _cache;
 }
