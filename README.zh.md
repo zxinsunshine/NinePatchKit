@@ -12,7 +12,7 @@
 
 * 解析png文件的二进制数据中chunk段数据
 * 根据npTc chunk数据切分点九图，重绘渲染
-* NinePathImageView像UITableViewCell一样拥有自己的contentView，可以填充任意内容
+* NinePatchImageView像UITableViewCell一样拥有自己的contentView，可以填充任意内容
 * 支持横向和纵向翻转
 * 支持多平台
 
@@ -50,7 +50,7 @@ pod 'NinePatchKit', '~> 1.0'
 #import <NinePatchKit/NinePatchKit.h>
 ...
 NSString * path = [[NSBundle mainBundle] pathForResource:@"YourNinePatchImageName" ofType:@"png"];
-NinePathImageView * imageView = [[NinePathImageView alloc] init];
+NinePatchImageView * imageView = [[NinePatchImageView alloc] init];
 imageView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
 ```
 
