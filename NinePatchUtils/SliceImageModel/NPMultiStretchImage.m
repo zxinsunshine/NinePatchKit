@@ -75,6 +75,7 @@
     }
     
     NPPngModel * pngModel = [[NPPngModel alloc] initWithData:imageData];
+    self.pngModel = pngModel;
     if (!pngModel.isNinePatch) {
         return;
     }
@@ -183,7 +184,6 @@
     self.sliceImages = slice2DList;
     self.maxSolidHeight = maxSolidHeight / fromScale;
     self.maxSolidWidth = maxSolidWidth / fromScale;
-    self.pngModel = pngModel;
 }
 
 
