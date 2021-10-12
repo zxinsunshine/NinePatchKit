@@ -279,26 +279,26 @@
             
             CGSize drawSize = line[i].rect.size;
             
-            // 若不用纵向拉伸，不绘制需要纵向拉伸的区域
+            // do not render vertical area when vertical stretch height is zero
             if (stretchSize.height == 0 && line[i].verticalStretchRatio > 0) {
                 continue;
             }
-            // 若不用横向拉伸，不绘制需要横向拉伸的区域
+            // do not render horizontal area when horizontal stretch height is zero
             if (stretchSize.width == 0 && line[i].horizontalStretchRatio > 0) {
                 continue;
             }
             
-            if (line[i].verticalStretchRatio > 0) { // 纵向拉伸区域
+            if (line[i].verticalStretchRatio > 0) { // vertical stretch area
                 CGFloat stretchHei = stretchSize.height * line[i].verticalStretchRatio;
                 drawSize.height = [self fixedNumber:stretchHei maxNum:(size.height - beginY)];
-            } else { // 纵向固定区域
+            } else { // vertical fixed area
                 CGFloat stretchHei = drawSize.height * solidHeightRatio;
                 drawSize.height = [self fixedNumber:stretchHei maxNum:(size.height - beginY)];
             }
-            if (line[i].horizontalStretchRatio) { // 横向拉伸区域
+            if (line[i].horizontalStretchRatio) { // horizontal stretch area
                 CGFloat stretchWid = stretchSize.width * line[i].horizontalStretchRatio;
                 drawSize.width = [self fixedNumber:stretchWid maxNum:(size.width - beginX)];
-            } else { // 横向固定区域
+            } else { // horizontal fixed area
                 CGFloat stretchWid = drawSize.width * solidWidthRatio;
                 drawSize.width = [self fixedNumber:stretchWid maxNum:(size.width - beginX)];
             }
