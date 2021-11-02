@@ -15,7 +15,6 @@
 @property (nonatomic, assign, readwrite) CGFloat maxSolidWidth;
 @property (nonatomic, assign, readwrite) EdgeStruct padding;
 @property (nonatomic, strong, readwrite) NPPngModel * pngModel;
-@property (nonatomic, strong, readwrite) ImageClass * totalImage;
 
 @end
 
@@ -24,46 +23,12 @@
 + (instancetype)generateImageWithData:(NSData *)data fromScale:(CGFloat)fromScale toScale:(CGFloat)toScale {
     
     NPMultiStretchImage * stretchImage = [[super alloc] initWithData:data]; // self is raw imagestretchImage
-    NPMultiStretchImage * scaledImage = (NPMultiStretchImage *)[self convertImage:stretchImage fromScale:fromScale toScale:toScale];
     // change physical pixels
     [stretchImage analyzeData:data fromScale:fromScale toScale:toScale];
-    stretchImage.totalImage = scaledImage;
     return stretchImage;
 }
 
 #pragma mark - Private Methods
-
-+ (ImageClass *)convertImage:(ImageClass *)image fromScale:(CGFloat)fromScale toScale:(CGFloat)toScale {
-    if (fromScale <= 0) {
-        fromScale = MaxScreenScale;
-    }
-    if (toScale < 0) {
-        toScale = 1;
-    }
-
-    if (fromScale == toScale) {
-        return image;
-    }
-
-    ImageClass * convertImage = nil;
-    CGSize rawImageSize = image.size;
-    CGSize targetImageSize = rawImageSize;
-    targetImageSize.width = targetImageSize.width / fromScale;
-    targetImageSize.height = targetImageSize.height / fromScale;
-#if TARGET_ON_iOS
-    UIGraphicsBeginImageContextWithOptions(targetImageSize, NO, toScale);
-    [image drawInRect:CGRectMake(0, 0, targetImageSize.width, targetImageSize.height)];
-    convertImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-#else
-    ImageClass *resizedImage = [[NPMultiStretchImage alloc] initWithSize:NSMakeSize(targetImageSize.width , targetImageSize.height)];
-    [resizedImage lockFocus];
-    [image drawInRect:NSMakeRect(0, 0, targetImageSize.width, targetImageSize.height) fromRect:NSMakeRect(0, 0, rawImageSize.width, rawImageSize.height) operation:NSCompositeSourceOver fraction:1.0];
-    [resizedImage unlockFocus];
-    convertImage = resizedImage;
-#endif
-    return convertImage;
-}
 
 - (void)analyzeData:(NSData *)imageData fromScale:(CGFloat)fromScale toScale:(CGFloat)toScale {
     

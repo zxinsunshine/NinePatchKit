@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, assign) CGFloat horizontalStretchRatio;
 @property (nonatomic, assign) CGFloat verticalStretchRatio;
-@property (nonatomic, strong) ImageClass * totalImage;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

@@ -27,14 +27,12 @@
     }
 #if TARGET_ON_iOS
     self = [super initWithCGImage:subCGImage];
-    self.totalImage = [super initWithCGImage:subCGImage];
 #else
     self = [super initWithCGImage:subCGImage size:rect.size];
-    self.totalImage = [super initWithCGImage:subCGImage size:rect.size];
 #endif
     CGImageRelease(subCGImage);
     
-    if (self.totalImage) {
+    if (self) {
         self.rect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
     }
     return self;

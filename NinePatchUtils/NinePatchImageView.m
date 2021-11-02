@@ -307,7 +307,7 @@
             // macOS's Y axis is reverse to iOS's
             finalBeginY = size.height - (beginY + drawSize.height);
 #endif
-            [line[i].totalImage drawInRect:CGRectMake(beginX, finalBeginY, drawSize.width, drawSize.height)];
+            [line[i] drawInRect:CGRectMake(beginX, finalBeginY, drawSize.width, drawSize.height)];
             
             beginX += drawSize.width;
             beginYList[i] = @(beginY + drawSize.height);
