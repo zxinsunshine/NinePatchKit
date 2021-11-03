@@ -7,6 +7,10 @@
 
 #import "NPMultiStretchImage.h"
 #import "NPPngModel.h"
+#import "NPPngNptcChunkModel.h"
+
+#define npTcTypeCode @"npTc"
+#define CgBITypeCode @"CgBI"
 
 @interface NPMultiStretchImage()
 
@@ -39,24 +43,18 @@
         toScale = 1;
     }
     
-    NPPngModel * pngModel = [[NPPngModel alloc] initWithData:imageData];
+    NSDictionary * registerClass = @{
+        npTcTypeCode: [NPPngNptcChunkModel class]
+    };
+    NPPngModel * pngModel = [[NPPngModel alloc] initWithData:imageData registerClass:registerClass];
     self.pngModel = pngModel;
-    if (!pngModel.isNinePatch) {
+    
+    NPPngChunkModel * targetChunkModel = self.pngModel.chunkDict[npTcTypeCode];
+    if (!targetChunkModel || ![targetChunkModel isKindOfClass:[NPPngNptcChunkModel class]]) {
         return;
     }
 
-    // find nptc chunk
-    __block NPPngNptcChunkModel * nptcChunkModel = nil;
-    [pngModel.chunkList enumerateObjectsUsingBlock:^(NPPngChunkModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[NPPngNptcChunkModel class]]) {
-            nptcChunkModel = (NPPngNptcChunkModel *)obj;
-            *stop = YES;
-        }
-    }];
-    // no nptc chunk
-    if (!nptcChunkModel) {
-        return;
-    }
+    NPPngNptcChunkModel * nptcChunkModel = (NPPngNptcChunkModel *)targetChunkModel;
     
     // calculate
     self.padding = EdgeStructMake(nptcChunkModel.padding.top / fromScale, nptcChunkModel.padding.left / fromScale, nptcChunkModel.padding.bottom / fromScale, nptcChunkModel.padding.right / fromScale);

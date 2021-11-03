@@ -7,13 +7,13 @@
 
 #import "NPPngModel.h"
 #import "NSData+BytesUtils.h"
-#import "NPPngNptcChunkModel.h"
+#import <objc/runtime.h>
 
 @interface NPPngModel()
 
-@property (nonatomic, strong, readwrite) NSArray<NPPngChunkModel *> * chunkList;
-@property (nonatomic, assign, readwrite) BOOL isNinePatch;
+@property (nonatomic, strong, readwrite) NSDictionary<NSString *, NPPngChunkModel *> * chunkDict;
 @property (nonatomic, strong, readwrite) NSData * pngData;
+@property (nonatomic, strong, readwrite) NSDictionary<NSString *, Class> *registerClass;
 
 @end
 
@@ -21,9 +21,14 @@
 
 - (instancetype)initWithData:(NSData *)data
 {
+    return [self initWithData:data registerClass:nil];
+}
+
+- (instancetype)initWithData:(NSData *)data registerClass:(NSDictionary<NSString *, Class> *)registerClass {
     self = [super init];
     if (self) {
         self.pngData = data;
+        self.registerClass = registerClass;
         [self analyzeWithData:data];
     }
     return self;
@@ -45,28 +50,28 @@
     
     // Png data is composed of file signature(8 bytes) and many chunk datas
     // each chunk is composed of Length(chunk data's length 4 bytes) + Chunk Type Code(4 bytes) + Chunk Data + CRC(Cyclic redundancy detection 4 bytes)
-    NSMutableArray * chunkList = [NSMutableArray array];
+    NSMutableDictionary * chunkDict = [NSMutableDictionary dictionary];
     NSInteger beginIndex = kPngSingnatureLen;
     NSInteger dataLen = data.length;
     while (YES) {
         
         NPPngChunkModel * model = nil;
         NSString * typeCode = [NPPngChunkModel codeTypeWithData:data beginIndex:beginIndex];
-        if ([typeCode isEqualToString:npTcTypeCode]) {
-            model = [[NPPngNptcChunkModel alloc] initWithData:data beginIndex:beginIndex];
-            self.isNinePatch = YES;
+        Class cls = self.registerClass[typeCode];
+        if (cls && [cls isKindOfClass:object_getClass([NPPngChunkModel class])]) {
+            model = [[cls alloc] initWithData:data beginIndex:beginIndex];
         } else {
             model = [[NPPngChunkModel alloc] initWithData:data beginIndex:beginIndex];
         }
         
-        [chunkList addObject:model];
+        [chunkDict setObject:model forKey:typeCode];
         beginIndex += model.totalLength;
         if (beginIndex >= dataLen) {
             break;
         }
     }
        
-    self.chunkList = chunkList;
+    self.chunkDict = chunkDict;
 }
 
 @end
