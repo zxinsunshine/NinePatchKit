@@ -27,6 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 // calculate arc number of chunk data
 + (NSInteger)calculateCrcCodeWithTypeAndChunkData:(NSData *)data;
 
+
+
+@end
+
+@interface NPPngChunkModel(ExtensionParse)
+
+- (void)analyzeChunkWithChunkData:(NSData *)data;
+
 @end
 
 NS_ASSUME_NONNULL_END

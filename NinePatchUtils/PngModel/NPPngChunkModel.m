@@ -53,8 +53,16 @@ static const NSInteger kChunkCrcBytesLen = 4; // CRC header length
         self.totalLength = kChunkDataLengthBytesLen + kChunkTypeBytesLen + self.chunkDataLength + kChunkCrcBytesLen;
         // total data
         self.totalData = [data subdataWithRange:NSMakeRange(index, self.totalLength)];
+        
+        [self extensionParseIfNeeded];
     }
     return self;
+}
+
+- (void)extensionParseIfNeeded {
+    if ([self respondsToSelector:@selector(analyzeChunkWithChunkData:)]) {
+        [self performSelector:@selector(analyzeChunkWithChunkData:) withObject:self.chunkData];
+    }
 }
 
 + (NSInteger)calculateCrcCodeWithTypeAndChunkData:(NSData *)data {

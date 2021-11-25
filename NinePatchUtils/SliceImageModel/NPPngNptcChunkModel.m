@@ -20,24 +20,13 @@
 @implementation NPPngNptcChunkModel
 
 
-- (instancetype)initWithData:(NSData *)data beginIndex:(NSInteger)index
-{
-    self = [super initWithData:data beginIndex:index];
-    if (self) {
-        [self analyzeChunk];
-    }
-    return self;
-}
-
-
 #pragma mark - Private Methods
-- (void)analyzeChunk {
+- (void)analyzeChunkWithChunkData:(NSData *)data {
     
-    if (!self.chunkData) {
+    if (!data) {
         return;
     }
     
-    NSData * data = self.chunkData;
     NSInteger byteLen = 0;
     NSInteger beginIndex = 0;
     NSRange lenRange = NSMakeRange(beginIndex, byteLen);
@@ -163,7 +152,6 @@
         self.divY = divYPointList;
         self.colors = colorList;
     }
-    
 }
 
 

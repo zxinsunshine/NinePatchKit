@@ -24,7 +24,7 @@
     return [self initWithData:data registerClass:nil];
 }
 
-- (instancetype)initWithData:(NSData *)data registerClass:(NSDictionary<NSString *, Class> *)registerClass {
+- (instancetype)initWithData:(NSData *)data registerClass:(nullable NSDictionary<NSString *, Class> *)registerClass; {
     self = [super init];
     if (self) {
         self.pngData = data;
@@ -57,6 +57,7 @@
         
         NPPngChunkModel * model = nil;
         NSString * typeCode = [NPPngChunkModel codeTypeWithData:data beginIndex:beginIndex];
+        
         Class cls = self.registerClass[typeCode];
         if (cls && [cls isKindOfClass:object_getClass([NPPngChunkModel class])]) {
             model = [[cls alloc] initWithData:data beginIndex:beginIndex];
