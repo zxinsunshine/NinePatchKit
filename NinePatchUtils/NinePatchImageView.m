@@ -21,10 +21,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-#if TARGET_ON_iOS
-        self.opaque = NO;
-#else
+#if TARGET_OS_OSX
         self.wantsLayer = YES;
+#else
+        self.opaque = NO;
 #endif
         [self addSubview:self.contentView];
     }
@@ -55,7 +55,7 @@
     _reverseX = reverseX;
     
     if (reverseX) {
-#if !TARGET_ON_iOS
+#if TARGET_OS_OSX
         [self setAnchorPoint:CGPointMake(0.5, 0.5) foirView:self];
         [self setAnchorPoint:CGPointMake(0.5, 0.5) foirView:self.contentView];
 #endif
@@ -82,18 +82,19 @@
     }
 }
 
-#if TARGET_ON_iOS
+#if TARGET_OS_OSX
+
+- (void)layout {
+    [super layout];
+    
+    [self refreshDrawing];
+}
+
+#else
 
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    
-    [self refreshDrawing];
-}
-#else
-
-- (void)layout {
-    [super layout];
     
     [self refreshDrawing];
 }
@@ -111,10 +112,10 @@
     self.layer.contents = nil;
     
     // redraw
-#if TARGET_ON_iOS
-    [self setNeedsDisplay];
-#else
+#if TARGET_OS_OSX
     [self setNeedsDisplay:YES];
+#else
+    [self setNeedsDisplay];
 #endif
 }
 
@@ -144,7 +145,7 @@
     CGFloat top = 0;
     CGFloat left = 0;
     
-#if TARGET_ON_iOS
+#if !TARGET_OS_OSX
     CGSize imageSize = image.size;
     UIViewContentMode curContentMode = self.contentMode;
     switch (curContentMode) {
@@ -303,7 +304,7 @@
                 drawSize.width = [self fixedNumber:stretchWid maxNum:(size.width - beginX)];
             }
             CGFloat finalBeginY = beginY;
-#if !TARGET_ON_iOS
+#if TARGET_OS_OSX
             // macOS's Y axis is reverse to iOS's
             finalBeginY = size.height - (beginY + drawSize.height);
 #endif
@@ -357,7 +358,7 @@
     if (!_contentView) {
         _contentView = ({
             ViewClass * view = [[ViewClass alloc] init];
-#if !TARGET_ON_iOS
+#if TARGET_OS_OSX
             view.wantsLayer = YES;
 #endif
             view;
