@@ -7,10 +7,20 @@
 
 #import <TargetConditionals.h>
 
+#if TARGET_OS_OSX
 
-#define TARGET_ON_iOS (TARGET_OS_IPHONE || TARGET_OS_SIMULATOR)
+#import <Cocoa/Cocoa.h>
+#define ImageClass NSImage
+#define ViewClass NSView
+#define EdgeStruct NSEdgeInsets
+#define EdgeStructZero NSEdgeInsetsZero
+#define EdgeStructMake NSEdgeInsetsMake
+#define UnsignedInt UInt
+#define ScreenScale [[NSScreen mainScreen] backingScaleFactor]
+#define ColorClass NSColor
+#define MaxScreenScale 2.0
 
-#if TARGET_ON_iOS
+#else
 
 #import <UIKit/UIKit.h>
 #define ImageClass UIImage
@@ -23,17 +33,5 @@
 #define ColorClass UIColor
 #define MaxScreenScale 3.0
 
-#else
-
-#import <Cocoa/Cocoa.h>
-#define ImageClass NSImage
-#define ViewClass NSView
-#define EdgeStruct NSEdgeInsets
-#define EdgeStructZero NSEdgeInsetsZero
-#define EdgeStructMake NSEdgeInsetsMake
-#define UnsignedInt UInt
-#define ScreenScale [[NSScreen mainScreen] backingScaleFactor]
-#define ColorClass NSColor
-#define MaxScreenScale 2.0
 
 #endif
