@@ -9,14 +9,15 @@
 #import <Masonry/Masonry.h>
 #import <NinePatchKit/NinePatchKit.h>
 
-@interface ZXStretchViewController ()<UITextViewDelegate>
+@interface ZXStretchViewController ()
 
 @property (nonatomic, strong) NinePatchImageView * backView;
 @property (nonatomic, strong) UIButton * switchBtn;
+@property (nonatomic, strong) UISwitch * openBtn;
+@property (nonatomic, strong) UILabel * openLabel;
 @property (nonatomic, strong) UISlider * slideView1;
-@property (nonatomic, strong) UISlider * slideView2;
-@property (nonatomic, strong) UITextView * label1;
-@property (nonatomic, strong) UITextView * label2;
+@property (nonatomic, strong) UILabel * label1;
+@property (nonatomic, strong) UILabel * contentLabel;
 
 @end
 
@@ -24,29 +25,33 @@
 
 - (void)viewDidLoad {
     self.view.backgroundColor = [UIColor whiteColor];
-    self.backView.contentView.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.1];
     
     [self.view addSubview:self.backView];
+    [self.backView.contentView addSubview:self.contentLabel];
+    [self.view addSubview:self.openBtn];
+    [self.view addSubview:self.openLabel];
     [self.view addSubview:self.slideView1];
-    [self.view addSubview:self.slideView2];
     [self.view addSubview:self.label1];
-    [self.view addSubview:self.label2];
     [self.view addSubview:self.switchBtn];
     
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
-        make.width.equalTo(@(self.slideView1.value));
-        make.height.equalTo(@(self.slideView2.value));
+        make.width.lessThanOrEqualTo(self.view).multipliedBy(0.8);
+    }];
+    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.backView.contentView);
+    }];
+    [self.openBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(10);
+        make.top.equalTo(self.view).offset(150);
+    }];
+    [self.openLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.openBtn);
+        make.left.equalTo(self.openBtn.mas_right).offset(10);
     }];
     [self.slideView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(200);
-        make.left.equalTo(self.view);
-        make.width.equalTo(@(310));
-        make.height.equalTo(@(50));
-    }];
-    [self.slideView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.slideView1.mas_bottom).offset(50);
-        make.left.equalTo(self.view);
+        make.top.equalTo(self.openBtn.mas_bottom).offset(10);
+        make.left.equalTo(self.view).offset(10);
         make.width.equalTo(@(310));
         make.height.equalTo(@(50));
     }];
@@ -56,23 +61,12 @@
         make.right.equalTo(self.view);
         make.height.equalTo(self.slideView1.mas_height);
     }];
-    [self.label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.slideView2);
-        make.left.equalTo(self.slideView2.mas_right);
-        make.right.equalTo(self.view);
-        make.height.equalTo(self.slideView2.mas_height);
-    }];
-    [self updateLabel];
-    
     [self.switchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.size.mas_equalTo(CGSizeMake(200, 50));
         make.bottom.equalTo(self.view).offset(-100);
     }];
     
-    self.slideView1.value = 100;
-    self.slideView2.value = 100;
-    [self refreshUI];
 }
 
 - (void)clickSwitchBtn {
@@ -87,50 +81,32 @@
     }
 }
 
+- (void)clickOpen:(UISwitch *)btn {
+    if (btn.isOn) {
+        self.backView.contentView.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.1];
+    } else {
+        self.backView.contentView.backgroundColor = nil;
+    }
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
     [self.label1 resignFirstResponder];
-    [self.label2 resignFirstResponder];
-  
 }
 
 - (void)slider1Change:(UISlider *)sender {
-    
-    [self refreshUI];
+    int value = round(sender.value);
+    sender.value = value;
+    self.label1.text = [NSString stringWithFormat:@"%d个字", value];
+    [self updateContent];
 }
 
-- (void)slider2Change:(UISlider *)sender {
-    
-    [self refreshUI];
-}
 
-- (void)refreshUI {
-    [self updateView];
-    [self updateLabel];
-}
-
-- (void)updateLabel {
-    self.label1.text = [NSString stringWithFormat:@"%.2lf", self.slideView1.value];
-    self.label2.text = [NSString stringWithFormat:@"%.2lf", self.slideView2.value];
-}
-
-- (void)updateView {
-    [self.backView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(self.slideView1.value));
-    }];
-    [self.backView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(self.slideView2.value));
-    }];
-}
-
-#pragma mark - UITextViewDelegate
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if ([textView isEqual:self.label1]) {
-        self.slideView1.value = [self.label1.text floatValue];
-    } else if ([textView isEqual:self.label2]) {
-        self.slideView2.value = [self.label2.text floatValue];
+- (void)updateContent {
+    NSMutableString * mStr = [[NSMutableString alloc] initWithString:@""];
+    for (int i = 0; i < self.slideView1.value; ++i) {
+        [mStr appendString:@"哈"];
     }
-    [self refreshUI];
+    self.contentLabel.text = mStr;
 }
 
 #pragma mark - Getter
@@ -147,30 +123,19 @@
 - (UISlider *)slideView1 {
     if (!_slideView1) {
         _slideView1 = [[UISlider alloc] init];
-        _slideView1.value = 300;
-        _slideView1.minimumValue = 10;
-        _slideView1.maximumValue = self.view.bounds.size.width;
+        _slideView1.value = 0;
+        _slideView1.minimumValue = 0;
+        _slideView1.maximumValue = 300;
         [_slideView1 addTarget:self action:@selector(slider1Change:) forControlEvents:UIControlEventValueChanged];
     }
     return _slideView1;
 }
 
-- (UISlider *)slideView2 {
-    if (!_slideView2) {
-        _slideView2 = [[UISlider alloc] init];
-        _slideView2.value = 300;
-        _slideView2.minimumValue = 10;
-        _slideView2.maximumValue = self.view.bounds.size.width;
-        [_slideView2 addTarget:self action:@selector(slider2Change:) forControlEvents:UIControlEventValueChanged];
-    }
-    return _slideView2;
-}
-
-- (UITextView *)label1 {
+- (UILabel *)label1 {
     if (!_label1) {
         _label1 = ({
-            UITextView * label = [[UITextView alloc] init];
-            label.delegate = self;
+            UILabel * label = [[UILabel alloc] init];
+            label.text = @"0个字";
             label.textColor = [UIColor blackColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.font = [UIFont systemFontOfSize:15];
@@ -179,21 +144,6 @@
         });
     }
     return _label1;
-}
-
-- (UITextView *)label2 {
-    if (!_label2) {
-        _label2 = ({
-            UITextView * label = [[UITextView alloc] init];
-            label.delegate = self;
-            label.textColor = [UIColor blackColor];
-            label.textAlignment = NSTextAlignmentCenter;
-            label.font = [UIFont systemFontOfSize:15];
-            label.backgroundColor = [UIColor clearColor];
-            label;
-        });
-    }
-    return _label2;
 }
 
 - (UIButton *)switchBtn {
@@ -208,6 +158,51 @@
         });
     }
     return _switchBtn;
+}
+
+- (UILabel *)contentLabel {
+    if (!_contentLabel) {
+        _contentLabel = ({
+            UILabel * label = [[UILabel alloc] init];
+            label.textColor = [UIColor blackColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont systemFontOfSize:15];
+            label.backgroundColor = [UIColor clearColor];
+            label.numberOfLines = 0;
+            label.lineBreakMode = NSLineBreakByTruncatingTail;
+            label;
+        });
+    }
+    return _contentLabel;
+}
+
+- (UILabel *)openLabel {
+    if (!_openLabel) {
+        _openLabel = ({
+            UILabel * label = [[UILabel alloc] init];
+            label.text = @"是否标记内容区域";
+            label.textColor = [UIColor blackColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont systemFontOfSize:15];
+            label.backgroundColor = [UIColor clearColor];
+            label.numberOfLines = 1;
+            label.lineBreakMode = NSLineBreakByTruncatingTail;
+            label;
+        });
+    }
+    return _openLabel;
+}
+
+- (UISwitch *)openBtn {
+    if (!_openBtn) {
+        _openBtn = ({
+            UISwitch * btn = [[UISwitch alloc] init];
+            btn.on = NO;
+            [btn addTarget:self action:@selector(clickOpen:) forControlEvents:UIControlEventValueChanged];
+            btn;
+        });
+    }
+    return _openBtn;
 }
 
 @end

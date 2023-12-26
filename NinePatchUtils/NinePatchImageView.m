@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign, readwrite) EdgeStruct padding;
 @property (nonatomic, strong, readwrite) ViewClass * contentView;
-
+@property (nonatomic, strong) NSMutableArray<NSLayoutConstraint *> * ninepatchConstraintList;
 @end
 
 @implementation NinePatchImageView
@@ -26,7 +26,9 @@
 #else
         self.opaque = NO;
 #endif
+        self.padding = EdgeStructZero;
         [self addSubview:self.contentView];
+        [self refresConstraint];
     }
     return self;
 }
@@ -44,7 +46,9 @@
     } else {
         self.padding = EdgeStructZero;
     }
-    
+    // update content view's layout
+    [self refresConstraint];
+    [self invalidateIntrinsicContentSize];
     [self refreshDrawing];
 }
 
@@ -101,12 +105,22 @@
 
 #endif
 
+- (CGSize)intrinsicContentSize {
+    CGSize size = [self.contentView intrinsicContentSize];
+    if (size.width < 0) {
+        size.width = 0;
+    }
+    if (size.height < 0) {
+        size.height = 0;
+    }
+    size.width += (self.padding.left + self.padding.right);
+    size.height += (self.padding.top + self.padding.bottom);
+    return size;
+}
 
 #pragma mark - Private Methods
 
 - (void)refreshDrawing {
-    // update content view's layout
-    [self updateContentView];
     
     // clear content
     self.layer.contents = nil;
@@ -316,22 +330,50 @@
     }
 }
 
-- (void)updateContentView {
-    CGSize size = self.bounds.size;
+- (void)refresConstraint {
+    ViewClass * superview = self;
+    ViewClass * childView = self.contentView;
+    childView.translatesAutoresizingMaskIntoConstraints = NO;
     EdgeStruct padding = self.padding;
-    CGFloat contentWid = MAX(0, size.width - (padding.left + padding.right));
-    CGFloat contentHei = MAX(0, size.height - (padding.top + padding.bottom));
-   
-    CGFloat contentLeft = padding.left;
-    if (contentWid == 0) {
-        contentLeft = (size.width - contentWid) / 2;
-    }
-    CGFloat contentTop = padding.top;
-    if (contentHei == 0) {
-        contentTop = (size.height - contentHei) / 2;
-    }
-    self.contentView.frame = CGRectMake(contentLeft, contentTop, contentWid, contentHei);
+    [superview removeConstraints:self.ninepatchConstraintList];
+    [self.ninepatchConstraintList removeAllObjects];
+    NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint constraintWithItem:childView
+                                                                          attribute:NSLayoutAttributeLeading
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:superview
+                                                                          attribute:NSLayoutAttributeLeading
+                                                                         multiplier:1.0
+                                                                           constant:padding.left];
+
+    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:childView
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:superview
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                          multiplier:1.0
+                                                                            constant:-padding.right];
+
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:childView
+                                                                      attribute:NSLayoutAttributeTop
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:superview
+                                                                      attribute:NSLayoutAttributeTop
+                                                                     multiplier:1.0
+                                                                       constant:padding.top];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:childView
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:superview
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                        multiplier:1.0
+                                                                          constant:-padding.bottom];
+
+    [self.ninepatchConstraintList addObjectsFromArray:@[leadingConstraint, trailingConstraint, topConstraint, bottomConstraint]];
+    // 添加约束到父视图
+    [superview addConstraints:self.ninepatchConstraintList];
 }
+
 
 
 - (CGFloat)fixedNumber:(CGFloat)num maxNum:(CGFloat)maxNum {
@@ -365,6 +407,13 @@
         });
     }
     return _contentView;
+}
+
+- (NSMutableArray<NSLayoutConstraint *> *)ninepatchConstraintList {
+    if (!_ninepatchConstraintList) {
+        _ninepatchConstraintList = [NSMutableArray array];
+    }
+    return _ninepatchConstraintList;
 }
 
 @end
