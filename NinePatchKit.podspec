@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
     s.source = {
         :git => 'https://github.com/zxinsunshine/NinePatchKit.git',
         :tag => s.version.to_s,
-        :branch => 'master'
     }
 
     s.source_files = "NinePatchUtils/*.{h,m,mm,swift}", "NinePatchUtils/**/*.{h,m,mm,swift}"
