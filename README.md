@@ -15,6 +15,7 @@ NinePatch image parser and render framework for iOS & macOS
 * NinePatchImageView has its contentView like UITableViewCell, where you can place any UI object
 * support flip horizontally and vertically
 * support muliple platform
+* support auto layout
 
 #### Requirements
 
@@ -34,7 +35,7 @@ NinePatch image parser and render framework for iOS & macOS
 The preferred installation method is with [CocoaPods](https://cocoapods.org). Add the following to your `Podfile`:
 
 ```ruby
-pod 'NinePatchKit', '~> 1.0'
+pod 'NinePatchKit'
 ```
 
 ##### Manual

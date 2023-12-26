@@ -15,6 +15,7 @@
 * NinePatchImageView像UITableViewCell一样拥有自己的contentView，可以填充任意内容
 * 支持横向和纵向翻转
 * 支持多平台
+* 支持自动布局
 
 #### 要求
 
@@ -37,7 +38,7 @@
 推荐使用[CocoaPods](https://cocoapods.org)来进行安装，只需添加如下语句到你的`Podfile`文件中:
 
 ```ruby
-pod 'NinePatchKit', '~> 1.0'
+pod 'NinePatchKit'
 ```
 
 ##### 手动安装
