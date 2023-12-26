@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString * text;
 @property (nonatomic, assign) BOOL isSender;
-@property (nonatomic, assign) CGSize bubbleSize;
-@property (nonatomic, assign) CGSize totalSize;
 @property (nonatomic, strong) ImageClass * backImage;
 
 @end

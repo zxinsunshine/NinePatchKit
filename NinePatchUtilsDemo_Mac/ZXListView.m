@@ -8,7 +8,7 @@
 #import "ZXListView.h"
 #import "ZXListViewCell.h"
 
-@interface ZXListView () <NSTabViewDelegate, NSTableViewDataSource>
+@interface ZXListView () <NSTableViewDelegate, NSTableViewDataSource>
 
 @property (nonatomic, strong) NSScrollView *scrollView;
 @property (nonatomic, strong) NSTableView *tableView;
@@ -64,7 +64,7 @@
     return self;
 }
 
-#pragma mark - NSTabViewDelegate, NSTableViewDataSource
+#pragma mark - NSTableViewDelegate, NSTableViewDataSource
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
     return self.modelList.count;
@@ -79,10 +79,6 @@
     return cell;
 }
 
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
-{
-    return self.modelList[row].totalSize.height;
-}
 
 #pragma mark - Property
 -(NSScrollView *)scrollView
@@ -106,6 +102,8 @@
         [_tableView setHeaderView:nil];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.usesAutomaticRowHeights = YES;
+        [_tableView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
     }
     
     return _tableView;

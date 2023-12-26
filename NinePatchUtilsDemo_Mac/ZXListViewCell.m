@@ -27,39 +27,12 @@ static const CGFloat kLabelFontSize = 13;
 
 + (ZXListViewCellModel *)modelForText:(NSString *)text sender:(BOOL)isSender withMaxWidth:(CGFloat)maxWidth backImage:(ImageClass *)image
 {
-    EdgeStruct padding = [NinePatchUtils paddingForImage:image];
-    CGSize bubbleSize = [self sizeForBubbleWithText:text maxWidth:maxWidth innerPadding:padding];
-    CGSize cellSize = CGSizeZero;
-    cellSize.width += space + kAvatarWH + space + bubbleSize.width;
-    cellSize.height = space + MAX(kAvatarWH, bubbleSize.height) + space;
-    
     ZXListViewCellModel *model = [ZXListViewCellModel new];
     model.text = text;
-    model.bubbleSize = bubbleSize;
-    model.totalSize = cellSize;
     model.isSender = isSender;
     model.backImage = image;
     
     return model;
-}
-
-+ (CGSize)sizeForBubbleWithText:(NSString *)text maxWidth:(CGFloat)maxWidth innerPadding:(EdgeStruct)padding
-{
-    CGSize maxSize = CGSizeMake(maxWidth, MAXFLOAT);
-    maxSize.width -= (ceil(padding.left) + ceil(padding.right));
-    maxSize.width = MAX(0, maxSize.width);
-    CGRect rect = [text boundingRectWithSize:maxSize options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin attributes:@{
-        NSFontAttributeName: [NSFont systemFontOfSize:kLabelFontSize]
-    } context:nil];
-    
-    CGSize size = rect.size;
-    // fix issue for NSTextField pading
-    size.width = ceil(size.width) + 5;
-    size.height = ceil(size.height);
-    
-    size.width += ceil(ceil(padding.left) + ceil(padding.right));
-    size.height += ceil(ceil(padding.top) + ceil(padding.bottom));
-    return size;
 }
 
 - (instancetype)initWithFrame:(NSRect)frame
@@ -90,11 +63,13 @@ static const CGFloat kLabelFontSize = 13;
             make.size.mas_equalTo(CGSizeMake(kAvatarWH, kAvatarWH));
             make.left.equalTo(self).offset(space);
             make.top.equalTo(self).offset(space);
+            make.bottom.lessThanOrEqualTo(self.mas_bottom).offset(-space);
         }];
         [self.showView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(self.model.bubbleSize);
             make.left.equalTo(self.avatarView.mas_right).offset(space);
             make.centerY.equalTo(self);
+            make.top.greaterThanOrEqualTo(self.mas_top).offset(space);
+            make.bottom.lessThanOrEqualTo(self.mas_bottom).offset(-space);
         }];
         self.avatarView.layer.backgroundColor = [ColorClass blueColor].CGColor;
     }
@@ -104,11 +79,13 @@ static const CGFloat kLabelFontSize = 13;
             make.size.mas_equalTo(CGSizeMake(kAvatarWH, kAvatarWH));
             make.right.equalTo(self).offset(-space);
             make.top.equalTo(self).offset(space);
+            make.bottom.lessThanOrEqualTo(self.mas_bottom).offset(-space);
         }];
         [self.showView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(self.model.bubbleSize);
             make.right.equalTo(self.avatarView.mas_left).offset(-space);
             make.centerY.equalTo(self);
+            make.top.greaterThanOrEqualTo(self.mas_top).offset(space);
+            make.bottom.lessThanOrEqualTo(self.mas_bottom).offset(-space);
         }];
         self.avatarView.layer.backgroundColor = [ColorClass redColor].CGColor;
     }
@@ -153,6 +130,7 @@ static const CGFloat kLabelFontSize = 13;
         _label.editable = NO;
         _label.bordered = NO;
         _label.backgroundColor = [ColorClass clearColor];
+        _label.preferredMaxLayoutWidth = 200;
     }
     
     return _label;
