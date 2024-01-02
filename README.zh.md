@@ -55,6 +55,10 @@ NinePatchImageView * imageView = [[NinePatchImageView alloc] init];
 imageView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
 ```
 
+#### 注意
+* 放置点九图
+  * 你可以把点九图**放在 bundle 、Data Set 或其它地方，但不要放在Image Set**中。在构建过程中，Image Set中的所有png图片都将通过**植入CgBI块、删除多余的chunk**来优化，因此放在Image Set中的点九图的格式会被破坏，无法正确解析.
+
 #### License
 
 `NinePatchKit` 遵循[MIT-licensed](https://github.com/zxinsunshine/NinePatchKit/blob/master/LICENSE)。

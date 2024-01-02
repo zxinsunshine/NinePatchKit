@@ -53,6 +53,10 @@ NinePatchImageView * imageView = [[NinePatchImageView alloc] init];
 imageView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
 ```
 
+#### Tips
+* Placement of nine-patch pictures
+  * You can place nine-patch pictures in **bundle, Data Set and other places besides Image Set**. During the construction, all png pictures in Image Set will be optimized by **implanting a CgBI chunk, and some chunks will be removed**, so the format of nine-patch pictures will be damaged and cannot be parsed.
+
 #### License
 
 `NinePatchKit` is [MIT-licensed](https://github.com/zxinsunshine/NinePatchKit/blob/master/LICENSE).
