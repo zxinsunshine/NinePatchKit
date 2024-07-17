@@ -57,7 +57,7 @@
     return padding;
 }
 
-+ (BOOL)isNinePathImage:(ImageClass *)image {
++ (BOOL)isNinePatchImage:(ImageClass *)image {
     BOOL isNinePatch = NO;
     if ([image isKindOfClass:[NPMultiStretchImage class]]) {
         NPMultiStretchImage * stretchImage = (NPMultiStretchImage *)image;

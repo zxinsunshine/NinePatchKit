@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Judge a Image is NinePatch
 /// @param image image object
-+ (BOOL)isNinePathImage:(ImageClass *)image;
++ (BOOL)isNinePatchImage:(ImageClass *)image;
 
 /// Clear Cache
 + (void)clearCache;
