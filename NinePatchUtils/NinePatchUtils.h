@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param image Image object
 + (EdgeStruct)paddingForImage:(ImageClass *)image;
 
+/// Judge a Image is NinePatch
+/// @param image image object
++ (BOOL)isNinePathImage:(ImageClass *)image;
+
 /// Clear Cache
 + (void)clearCache;
 

@@ -74,7 +74,6 @@
     static NSInteger count = 1;
     NSString * path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%zd", count] ofType:@"png"];
     self.backView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
-
     ++count;
     if (count > 4) {
         count = 1;

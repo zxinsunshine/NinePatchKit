@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) CGFloat maxSolidHeight;
 @property (nonatomic, assign, readonly) CGFloat maxSolidWidth;
 @property (nonatomic, assign, readonly) EdgeStruct padding;
+@property (nonatomic, assign, readonly) BOOL isNinePatch;
 
 /// Generate stretchImage
 /// @param data image data

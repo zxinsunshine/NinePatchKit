@@ -57,6 +57,15 @@
     return padding;
 }
 
++ (BOOL)isNinePathImage:(ImageClass *)image {
+    BOOL isNinePatch = NO;
+    if ([image isKindOfClass:[NPMultiStretchImage class]]) {
+        NPMultiStretchImage * stretchImage = (NPMultiStretchImage *)image;
+        return stretchImage.isNinePatch;
+    }
+    return isNinePatch;
+}
+
 #pragma mark - Private Methods
 + (instancetype)sharedInstance {
     static NinePatchUtils * _sharedInstance = nil;

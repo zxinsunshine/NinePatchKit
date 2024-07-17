@@ -19,7 +19,7 @@
 @property (nonatomic, assign, readwrite) CGFloat maxSolidWidth;
 @property (nonatomic, assign, readwrite) EdgeStruct padding;
 @property (nonatomic, strong, readwrite) NPPngModel * pngModel;
-
+@property (nonatomic, assign, readwrite) BOOL isNinePatch;
 @end
 
 @implementation NPMultiStretchImage
@@ -55,6 +55,7 @@
     }
 
     NPPngNptcChunkModel * nptcChunkModel = (NPPngNptcChunkModel *)targetChunkModel;
+    self.isNinePatch = YES;
     
     // calculate
     self.padding = EdgeStructMake(nptcChunkModel.padding.top / fromScale, nptcChunkModel.padding.left / fromScale, nptcChunkModel.padding.bottom / fromScale, nptcChunkModel.padding.right / fromScale);
