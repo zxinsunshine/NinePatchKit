@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "NinePatchKit"
-    s.version          = "2.0"
+    s.version          = "2.1"
     s.summary          = "NinePatch image render framework"
     s.author           = { "Theo" => "zxinsunshine@126.com" }
 

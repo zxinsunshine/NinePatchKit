@@ -51,6 +51,8 @@ Copy NinePatchUtils directory in your project
 NSString * path = [[NSBundle mainBundle] pathForResource:@"YourNinePatchImageName" ofType:@"png"];
 NinePatchImageView * imageView = [[NinePatchImageView alloc] init];
 imageView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
+
+[imageView.contentView addSubview:CustomView]; // add subview to contentView
 ```
 
 #### Tips
