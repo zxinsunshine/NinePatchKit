@@ -39,7 +39,7 @@
         @"OK"
     ];
     CGFloat maxWidth = self.view.bounds.size.width / 2;
-    NSString * imagePath = [[NSBundle mainBundle] pathForResource:@"5" ofType:@"png"];
+    NSString * imagePath = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"png"];
     ImageClass * bubbleImage = [NinePatchUtils imageWithContentsOfFile:imagePath];
     for (int i = 0; i < 10; ++i) {
         [chatList enumerateObjectsUsingBlock:^(NSString * obj, NSUInteger idx, BOOL * _Nonnull stop) {

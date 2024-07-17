@@ -92,20 +92,22 @@
             CGFloat y = [yPointList[j] floatValue];
             CGFloat w = [xPointList[i+1] floatValue] - x;
             CGFloat h = [yPointList[j+1] floatValue] - y;
+            BOOL stretchX = ((i % 2) == 1); // judge whether to stretch the x-axis according to the starting point of the x-axis
+            if (j == 0 && !stretchX) {
+                maxSolidWidth += w;
+            }
+            if (i == 0 && !stretchY) {
+                maxSolidHeight += h;
+            }
             if (w > 0 && h > 0) {
                 CGRect pointRect = CGRectMake(x, y, w, h);
                 NPMultiStretchSliceImage * sliceImage = [[NPMultiStretchSliceImage alloc] initWithImage:rawImage subRect:pointRect];
                 if (sliceImage) {
-                    BOOL stretchX = ((i % 2) == 1); // judge whether to stretch the x-axis according to the starting point of the x-axis
                     if (stretchX) {
                         sliceImage.horizontalStretchRatio = 1; // temporary marking
-                    } else if (j == 0) {
-                        maxSolidWidth += sliceImage.rect.size.width;
                     }
                     if (stretchY) {
                         sliceImage.verticalStretchRatio = 1; // temporary marking
-                    } else if (i == 0) { // count the maximum fixed height of the first column
-                        maxSolidHeight += sliceImage.rect.size.height;
                     }
                     [stretchLine addObject:sliceImage];
                 }

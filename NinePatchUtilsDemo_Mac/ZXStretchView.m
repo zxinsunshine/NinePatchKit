@@ -85,7 +85,7 @@
 - (void)switchButtonClicked:(id)sender
 {
     ++self.imageNumber;
-    if (self.imageNumber > 5) {
+    if (self.imageNumber > 4) {
         self.imageNumber = 1;
     }
     NSString * path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%zd", self.imageNumber] ofType:@"png"];

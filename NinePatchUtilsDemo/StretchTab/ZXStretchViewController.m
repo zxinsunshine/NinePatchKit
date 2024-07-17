@@ -76,7 +76,7 @@
     self.backView.showImage = [NinePatchUtils imageWithContentsOfFile:path];
 
     ++count;
-    if (count > 5) {
+    if (count > 4) {
         count = 1;
     }
 }

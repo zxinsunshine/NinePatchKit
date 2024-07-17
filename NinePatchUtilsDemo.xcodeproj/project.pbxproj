@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,13 +16,11 @@
 		528A364226A523C0004A291F /* ZXListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 528A364126A523C0004A291F /* ZXListViewController.m */; };
 		528A366526A52957004A291F /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A365726A52957004A291F /* 3.png */; };
 		528A366626A52957004A291F /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A365826A52957004A291F /* 4.png */; };
-		528A366826A52957004A291F /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A365A26A52957004A291F /* 5.png */; };
 		528A366F26A52957004A291F /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A366126A52957004A291F /* 2.png */; };
 		528A367126A52957004A291F /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A366326A52957004A291F /* 1.png */; };
 		528A368426A52B86004A291F /* ZXListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 528A368326A52B86004A291F /* ZXListTableViewCell.m */; };
 		52C57E0D26BD3E58004E38C6 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A365726A52957004A291F /* 3.png */; };
 		52C57E0E26BD3E5B004E38C6 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A365826A52957004A291F /* 4.png */; };
-		52C57E1026BD3E60004E38C6 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A365A26A52957004A291F /* 5.png */; };
 		52C57E1626BD3E73004E38C6 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A366126A52957004A291F /* 2.png */; };
 		52C57E1826BD3E78004E38C6 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A366326A52957004A291F /* 1.png */; };
 		9110672C945FD7B1E89E560B /* Pods_NinePatchUtilsDemo_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAF4D9BC097FE0A50180602 /* Pods_NinePatchUtilsDemo_Mac.framework */; };
@@ -55,7 +53,6 @@
 		528A364126A523C0004A291F /* ZXListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZXListViewController.m; sourceTree = "<group>"; };
 		528A365726A52957004A291F /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		528A365826A52957004A291F /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		528A365A26A52957004A291F /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
 		528A366126A52957004A291F /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		528A366326A52957004A291F /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		528A368226A52B86004A291F /* ZXListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZXListTableViewCell.h; sourceTree = "<group>"; };
@@ -176,7 +173,6 @@
 			children = (
 				528A365726A52957004A291F /* 3.png */,
 				528A365826A52957004A291F /* 4.png */,
-				528A365A26A52957004A291F /* 5.png */,
 				528A366126A52957004A291F /* 2.png */,
 				528A366326A52957004A291F /* 1.png */,
 			);
@@ -314,7 +310,6 @@
 				528A363026A522D6004A291F /* Assets.xcassets in Resources */,
 				528A366F26A52957004A291F /* 2.png in Resources */,
 				528A366626A52957004A291F /* 4.png in Resources */,
-				528A366826A52957004A291F /* 5.png in Resources */,
 				528A363326A522D6004A291F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,7 +320,6 @@
 			files = (
 				52C57E0D26BD3E58004E38C6 /* 3.png in Resources */,
 				52C57E1826BD3E78004E38C6 /* 1.png in Resources */,
-				52C57E1026BD3E60004E38C6 /* 5.png in Resources */,
 				52C57E0E26BD3E5B004E38C6 /* 4.png in Resources */,
 				A39FF76626BBB47F001B0C1C /* Assets.xcassets in Resources */,
 				52C57E1626BD3E73004E38C6 /* 2.png in Resources */,
@@ -587,6 +581,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NinePatchUtilsDemo/Info.plist;
@@ -608,6 +603,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NinePatchUtilsDemo/Info.plist;
@@ -629,6 +625,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NinePatchUtilsDemo_Mac/NinePatchUtilsDemo_Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
@@ -653,6 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NinePatchUtilsDemo_Mac/NinePatchUtilsDemo_Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
